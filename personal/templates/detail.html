@@ -1,0 +1,81 @@
+<!-- Display product details -->
+{% extends 'header.html' %}
+
+{% block content %}
+  <section id="content" class="container">
+    {% if product %}
+      <div class="row product-info">
+        <div class="col-sm-6 image-gallery">
+          <img class="image-hover-main" src="{{ product.image.url }}" alt="Product" />
+          <img class="image-hover-secondary" src="{{ product.image_hover.url }}" alt="Room" />
+        </div>
+        <div class="col-sm-6">
+          <h1>{{ product.name }}</h1>
+          <p>{{ product.description }}</p>
+        </div>
+      </div> <!-- end row -->
+      <hr class="my-lg-5" />
+      <div class="row product-detail">
+        <div class="col-sm-12">
+          {% autoescape off %}
+            {{ product.details }}
+          {% endautoescape %}
+        </div>
+      </div> <!-- end row -->
+    {% endif %}
+  </section> <!-- end section -->
+
+  <!-- Product review header -->
+  <section id="reviews" class="container">
+    <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+      <div class="mb-3 me-sm-3">
+        <h2>User reviews</h2>
+        <div class="d-flex align-items-center fs-sm">
+          <div class="d-flex gap-1 me-2"></div>Based on 6 reviews
+        </div>
+      </div>
+      {% if user.is_anonymous %}
+        <a href="{% url 'user_auth:login' %}" class="btn btn-lg btn-outline-dark rounded-pill mb-3">Sign In to review</a>
+      {% else %}
+        <button type="button" class="btn btn-lg btn-outline-dark rounded-pill mb-3" data-toggle="collapse" data-target="#review_form">Leave a review</button>
+      {% endif %}
+    </div>
+
+    <!-- Review form -->
+    {% if review_form %}
+      <form method="post" id="review_form" class="needs-validation collapse">
+        {% csrf_token %}
+
+        {% for field in review_form %}
+          <div class="form-group">
+            <label class="sr-only" for="{{ field.html_name }}">{{ field.label }}</label>
+            <input class="form-control" type="{{ field.field.widget.input_type }}" name="{{ field.name }}" placeholder="{{ field.label }}" type="text" required />
+            {% for error in field.errors %}
+              <small style="color: red">{{ error }}</small>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <input type="submit" class="btn btn-primary" value="Submit" />
+        <hr />
+      </form>
+    {% endif %}
+
+    <!-- Display product reviews -->
+    {% if reviews %}
+      {% for review in reviews %}
+        <div class="card">
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <p>{{ review.comment }}</p>
+              <small>{{ review.date }}</small>
+              <div class="blockquote-footer">
+                <cite title="Source Title">{{ review.user_name }}</cite>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </section> <!-- end section -->
+{% endblock %}

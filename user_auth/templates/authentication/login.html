@@ -1,0 +1,33 @@
+<!-- User login form -->
+{% extends 'header.html' %}
+
+{% block content %}
+  <section id="content" class="container">
+    <h3>Login as User</h3>
+    <hr />
+
+    {% for message in messages %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <a class="close" href="#" data-dismiss="alert">×</a>
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <form method="post" class="needs-validation">
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div class="form-group">
+          <label class="sr-only" for="{{ field.html_name }}">{{ field.label }}</label>
+          <input class="form-control" type="{{ field.field.widget.input_type }}" name="{{ field.name }}" placeholder="{{ field.label }}" type="text" />
+          {% for error in field.errors %}
+            <small style="color: red">{{ error }}</small>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <input type="submit" class="btn btn-primary" value="Login" />
+      <hr />Don"t have an account yet? <a href="{% url 'user_auth:register' %}?next={{ next }}">Register</a>.
+    </form>
+  </section> <!-- end section -->
+{% endblock %}

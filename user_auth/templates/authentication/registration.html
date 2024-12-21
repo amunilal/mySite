@@ -1,0 +1,30 @@
+<!-- User registration form -->
+{% extends 'header.html' %}
+
+{% block content %}
+  <section id="content" class="container">
+    <h3>Register</h3>
+    <p>Please fill in this form to create an account.</p>
+    <hr />
+
+    <form action="" method="POST">
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div class="form-group">
+          <label class="sr-only" for="{{ field.html_name }}">{{ field.label }}</label>
+          <input class="form-control" type="{{ field.field.widget.input_type }}" name="{{ field.name }}" placeholder="{{ field.label }}" type="text" />
+          {% for error in field.errors %}
+            <small style="color: red">{{ error }}</small>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="btn btn-primary">Register</button>
+      <hr />
+      <p>
+        Already have an account? <a href="{% url 'user_auth:login' %}">Sign in</a>.
+      </p>
+    </form>
+  </section> <!-- end section -->
+{% endblock %}
