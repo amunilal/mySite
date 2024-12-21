@@ -56,7 +56,13 @@ python manage.py runserver
 ```
 This will start the Django development server at http://127.0.0.1:8000/. You can access the project in your web browser.
 
-![ScreenShot](screenshots/Screenshot 2024-12-21 at 15.39.54.png)
+![ScreenShot](screenshots/Screenshot-1.png)
+![ScreenShot](screenshots/Screenshot-2.png)
+![ScreenShot](screenshots/Screenshot-3.png)
+![ScreenShot](screenshots/Screenshot-4.png)
+![ScreenShot](screenshots/Screenshot-5.png)
+![ScreenShot](screenshots/Screenshot-6.png)
+![ScreenShot](screenshots/Screenshot-7.png)
 
 ## Features
 
