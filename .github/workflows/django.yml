@@ -37,7 +37,7 @@ jobs:
           END
       - name: Run deploy
         run: |
-          ssh target "cd mySite/ && git pull && manage.py runserver"
+          ssh target "cd git pull && manage.py runserver"
       # - uses: actions/checkout@v4
       # - name: Set up Python ${{ matrix.python-version }}
       #   uses: actions/setup-python@v3
