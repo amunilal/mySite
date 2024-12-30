@@ -16,26 +16,20 @@ class Customer(models.Model):
 
 
 class Category(models.Model):
-    """Represents a category of products in the system.
+    """
+    Represents a category for grouping products.
 
     Attributes:
-        name (CharField): The name of the category. Max length: 50.
-
-    Methods:
-        __str__: Returns the name of the category as a string.
+        name (str): The name of the category, limited to 50 characters.
     """
     name = models.CharField(max_length=50)
 
     def __str__(self) -> str:
-        """Returns the name of the category.
+        """
+        Returns the string representation of the category.
 
-        Returns:
-            str: The name of the category.
-
-        Example:
-            >>> category = Category(name="Decoration")
-            >>> str(category)
-            'Decoration'
+        :returns: The category name.
+        :rtype: str
         """
         return self.name
 
