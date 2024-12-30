@@ -41,7 +41,20 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    """Product details"""
+    """Represents a product in the system.
+
+    Attributes:
+        name (CharField): The name of the product. Max length: 50.
+        price (DecimalField): The price of the product with up to 6 digits and 2 decimal places. Default: 0.
+        category (ForeignKey): A foreign key to the Category model. Default: 1.
+        description (CharField): A brief description of the product. Max length: 250. Default: blank.
+        details (TextField): Additional details about the product. Default: blank.
+        image (ImageField): The main image of the product. Uploaded to 'uploads/product/'.
+        image_hover (ImageField): An optional hover image of the product. Uploaded to 'uploads/product/'.
+
+    Methods:
+        __str__: Returns the name of the product as a string.
+    """
     name = models.CharField(max_length=50)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
@@ -52,6 +65,16 @@ class Product(models.Model):
     image_hover = models.ImageField(upload_to='uploads/product/', blank=True)
 
     def __str__(self) -> str:
+        """Returns the name of the product.
+
+       Returns:
+           str: The name of the product.
+
+       Example:
+           >>> product = Product(name="Lamp")
+           >>> str(product)
+           'Lamp'
+       """
         return self.name
 
 
