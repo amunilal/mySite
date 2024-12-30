@@ -16,10 +16,27 @@ class Customer(models.Model):
 
 
 class Category(models.Model):
-    """Category of products"""
+    """Represents a category of products in the system.
+
+    Attributes:
+        name (CharField): The name of the category. Max length: 50.
+
+    Methods:
+        __str__: Returns the name of the category as a string.
+    """
     name = models.CharField(max_length=50)
 
     def __str__(self) -> str:
+        """Returns the name of the category.
+
+        Returns:
+            str: The name of the category.
+
+        Example:
+            >>> category = Category(name="Decoration")
+            >>> str(category)
+            'Decoration'
+        """
         return self.name
 
 
@@ -67,5 +84,5 @@ class Order(models.Model):
     date = models.DateField(default=datetime.datetime.today)
     status = models.BooleanField(default=False)
 
-    def __str__(self) -> str:
+    def __str__(self) -> Product:
         return self.product
