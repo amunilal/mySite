@@ -11,7 +11,24 @@ def index(request):
 
 
 def detail(request, product_id):
-    """Detail View"""
+    """
+    Display the details of a specific product along with its associated reviews,
+    and allow users to submit reviews for the product.
+
+    :param request:
+        The HTTP request object containing metadata about the request
+        (e.g., method, user, POST data).
+    :type request: HttpRequest
+    :param product_id:
+        The ID of the product to retrieve and display.
+    :type product_id: int
+
+    :returns:
+        Renders the `detail.html` template with the product details,
+        associated reviews, and the review form. If a valid review is submitted,
+        redirects back to the same page with the `#reviews` anchor.
+    :rtype: HttpResponse
+    """
     product = get_object_or_404(Product, pk=product_id)
     reviews = Review.objects.filter(
         product_id=product_id).order_by("-id")
