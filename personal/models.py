@@ -79,16 +79,15 @@ class Product(models.Model):
 
 
 class Review(models.Model):
-    """Represents customer reviews for products.
+    """
+    Represents a review submitted by a user for a specific product.
 
     Attributes:
-    product (ForeignKey): A foreign key linking the review to a specific product. Default: 1.
-    user_name (CharField): The name of the user leaving the review. Max length: 50.
-    date (DateField): The date the review was posted. Default: today's date.
-    comment (CharField): The text of the review. Max length: 250.
-
-    Methods:
-    __str__: Returns the review comment as a string.
+        product (ForeignKey): A reference to the associated product. If the product is deleted,
+            all related reviews are also deleted (CASCADE).
+        user_name (str): The name of the user who submitted the review.
+        date (date): The date when the review was submitted. Defaults to the current date.
+        comment (str): The review content or feedback. Limited to 250 characters.
     """
     product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
     user_name = models.CharField(max_length=50)
@@ -97,15 +96,11 @@ class Review(models.Model):
         max_length=250, default='')
 
     def __str__(self) -> str:
-        """Returns the review comment.
+        """
+        Returns the string representation of the review.
 
-        Returns:
-            str: The text of the review comment.
-
-        Example:
-            >>> review = Review(comment="Great product!")
-            >>> str(review)
-            'Great product!'
+        :returns: The review comment.
+        :rtype: str
         """
         return self.comment
 
