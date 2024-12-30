@@ -41,19 +41,18 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    """Represents a product in the system.
+    """
+    Represents a product available in the store.
 
     Attributes:
-        name (CharField): The name of the product. Max length: 50.
-        price (DecimalField): The price of the product with up to 6 digits and 2 decimal places. Default: 0.
-        category (ForeignKey): A foreign key to the Category model. Default: 1.
-        description (CharField): A brief description of the product. Max length: 250. Default: blank.
-        details (TextField): Additional details about the product. Default: blank.
-        image (ImageField): The main image of the product. Uploaded to 'uploads/product/'.
-        image_hover (ImageField): An optional hover image of the product. Uploaded to 'uploads/product/'.
-
-    Methods:
-        __str__: Returns the name of the product as a string.
+        name (str): The name of the product, limited to 50 characters.
+        price (Decimal): The price of the product with up to 2 decimal places.
+        category (ForeignKey): A reference to the category the product belongs to.
+            If the category is deleted, the related products are also deleted (CASCADE).
+        description (str): A short description of the product, optional.
+        details (str): A detailed description of the product, optional.
+        image (ImageField): The primary image of the product. This is required.
+        image_hover (ImageField): An optional secondary image that appears on hover.
     """
     name = models.CharField(max_length=50)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
@@ -65,16 +64,12 @@ class Product(models.Model):
     image_hover = models.ImageField(upload_to='uploads/product/', blank=True)
 
     def __str__(self) -> str:
-        """Returns the name of the product.
+        """
+        Returns the string representation of the product.
 
-       Returns:
-           str: The name of the product.
-
-       Example:
-           >>> product = Product(name="Lamp")
-           >>> str(product)
-           'Lamp'
-       """
+        :returns: The product name.
+        :rtype: str
+        """
         return self.name
 
 
