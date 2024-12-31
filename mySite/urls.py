@@ -19,9 +19,10 @@ from django.urls import include, path
 from . import settings
 from django.conf.urls.static import static
 
-urlpatterns = [
+urlpatterns = ([
     path('admin/', admin.site.urls),
     path('', include('personal.urls')),
     path('user_auth/', include("django.contrib.auth.urls")),
     path('user_auth/', include("user_auth.urls")),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # to import static in deployment
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
++ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)) # to import static in deployment
