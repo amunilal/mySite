@@ -49,6 +49,16 @@ python manage.py migrate
 ```sh 
 python manage.py createsuperuser
 ```
+3. Generate new `SECRET_KEY` for django project
+```sh
+python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+```
+4. Add environment variables
+```sh
+echo "DJANGO_SECRET_KEY=YOUR_SECRET_KEY
+DEBUG=False
+DJANGO_ALLOWED_HOSTS=*" > .env
+```
 3.Run the development server:
 ```sh 
 python manage.py runserver
