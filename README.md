@@ -18,7 +18,6 @@ Before setting up the project, make sure you have the following tools installed:
 - Python 3.x (3.8 or above recommended)
 - pip
 - Virtualenv (optional, but recommended)
-- PostgreSQL or SQLite (depending on your database configuration)
 
 For development, you can use Docker, if available.
 
